@@ -119,3 +119,31 @@ func containsDuplicate(nums []int) bool {
 	}
 	return false
 }
+
+//singleNumber
+//给定一个非空整数数组，除了某个元素只出现一次以外，其余每个元素均出现两次。找出那个只出现了一次的元素。
+func singleNumber(nums []int) int {
+	length := len(nums)
+	if length == 1 {
+		return nums[0]
+	}
+	m := make(map[int]int, length/2)
+	for _, v := range nums {
+		m[v]++
+	}
+	for k, v := range m {
+		if v == 1 {
+			return k
+		}
+	}
+	return 0
+}
+
+//利用异或的特性 A^B^C^B^A = B^B^A^A^C = C
+func singleNumberPerfect(nums []int) int {
+	res := 0
+	for _, n := range nums {
+		res = res ^ n
+	}
+	return res
+}
