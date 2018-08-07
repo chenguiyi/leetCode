@@ -147,3 +147,18 @@ func singleNumberPerfect(nums []int) int {
 	}
 	return res
 }
+
+func intersect(nums1 []int, nums2 []int) []int {
+	data := []int{}
+	m1 := make(map[int]int, len(nums1))
+	for _, v := range nums1 {
+		m1[v]++
+	}
+	for _, v := range nums2 {
+		if _, ok := m1[v]; ok && m1[v] > 0 {
+			data = append(data, v)
+			m1[v]--
+		}
+	}
+	return data
+}
