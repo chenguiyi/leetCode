@@ -184,3 +184,30 @@ func plusOne(digits []int) []int {
 	}
 	return digits
 }
+
+//moveZeroes 给定一个数组 nums，编写一个函数将所有 0 移动到数组的末尾，同时保持非零元素的相对顺序。
+func moveZeroes(nums []int) {
+	length := len(nums)
+	for i := 0; i < length-1; i++ {
+		if nums[i] == 0 {
+			for j := i + 1; j < length; j++ {
+				if nums[j] != 0 {
+					nums[i], nums[j] = nums[j], nums[i]
+					break
+				}
+			}
+		}
+	}
+}
+
+func moveZeroes_1(nums []int) {
+	length := len(nums)
+	for i, k := 0, 0; i < length; i++ {
+		if nums[i] != 0 {
+			if i != k {
+				nums[i], nums[k] = nums[k], nums[i]
+			}
+			k++
+		}
+	}
+}
