@@ -211,3 +211,28 @@ func moveZeroes_1(nums []int) {
 		}
 	}
 }
+
+//判断一个 9x9 的数独是否有效。只需要根据以下规则，验证已经填入的数字是否有效即可。
+// 数字 1-9 在每一行只能出现一次。
+// 数字 1-9 在每一列只能出现一次。
+// 数字 1-9 在每一个以粗实线分隔的 3x3 宫内只能出现一次。
+func isValidSudoku(board [][]byte) bool {
+	dataC := [9][9]bool{}
+	dataR := [9][9]bool{}
+	dataS := [9][9]bool{}
+	for i := 0; i < 9; i++ {
+		for j := 0; j < 9; j++ {
+			if board[i][j] == '.' {
+				continue
+			}
+			c := board[i][j] - '0' - 1
+			if dataC[i][c] || dataR[c][j] || dataS[3*(i/3)+j/3][c] {
+				return false
+			}
+			dataC[i][c] = true
+			dataR[c][j] = true
+			dataS[3*(i/3)+j/3][c] = true
+		}
+	}
+	return true
+}
